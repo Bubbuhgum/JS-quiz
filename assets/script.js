@@ -1,5 +1,11 @@
 var timerEl = document.querySelector(".timer");
-var beginQuiz = document.querySelector(".btn-start");
+var beginQuizButton = document.querySelector("#btn-start");
+var wrongAnswer = document.querySelector("btn-wrong");
+var timeLeft = 60;
+
+//Add event listener to start button
+beginQuizButton.addEventListener('click', startQuiz);
+wrongAnswer.addEventListener('click', decreaseTime);
 
 //Hide question and answers on first screen
 var hideQuiz = document.getElementById("questions-container").style.display = 'none';
@@ -33,14 +39,34 @@ const questions = [
     }
 ]; 
 
+// time decreases by 10 sec at click of wrong answer
+function decreaseTime() {
+    timeLeft -=10;
+}
+
+function startTimer() {
+    var timer = setInterval(function() {
+        timeLeft --;
+        timerEl.innerHTML = timeLeft;
+        if (timeLeft <0) {
+            clearInterval(timer);
+            alert('You Lose');
+            endQuiz();
+        }
+    }, 1000);
+}
+
+//endQuiz function
+function endQuiz() {
+    timerEl.innerHTML = "0";
+}
 
 //create variable to begin quiz and display questions in array
 // timer starts at click of button, score will start at 0
-function showQuiz() {
+function startQuiz() {
+    startTimer();
     document.getElementById('click', 'questions-container');
 }
-
-console.log(showQuiz);
 
 //Loop over questions if loop
 
