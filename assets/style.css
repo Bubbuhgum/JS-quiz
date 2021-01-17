@@ -24,7 +24,7 @@
 }
 
 
-.a-btn {
+.a-btn, #btn-start {
     background-color: darkblue;
     color: white; 
     border-radius: 5px; 
@@ -33,7 +33,7 @@
     margin: 3px; 
 }
 
-.a-btn:hover {
+.a-btn:hover, #btn-start:hover {
     background-color: purple;
 }
 

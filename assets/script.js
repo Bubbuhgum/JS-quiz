@@ -1,6 +1,8 @@
+var timerEl = document.querySelector(".timer");
+var beginQuiz = document.querySelector(".btn-start");
+
 //Hide question and answers on first screen
 var hideQuiz = document.getElementById("questions-container").style.display = 'none';
-console.log(hideQuiz);
 
 //create array for questions
 const questions = [ 
@@ -31,13 +33,16 @@ const questions = [
     }
 ]; 
 
-//create variable to Begin Quiz and timer at click, score will start at 0
 
-//document.getElementById("click", function());
+//create variable to begin quiz and display questions in array
+// timer starts at click of button, score will start at 0
+function showQuiz() {
+    document.getElementById('click', 'questions-container');
+}
 
-//Start score at 0
+console.log(showQuiz);
 
-//Loop over questions
+//Loop over questions if loop
 
 //Compare answers
 
@@ -49,4 +54,4 @@ const questions = [
 
 //Show Final Score
 
-//Save highscore and initials
+//Save highscore and initials to localStorage
