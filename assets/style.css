@@ -1,0 +1,40 @@
+#see-scores {
+    background-color: white;
+    border: none;
+    color: red;
+}
+
+#see-scores:hover {
+    color: blue; 
+}
+
+.header-style {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 15px;
+}
+
+#main-quiz {
+    text-align: center;
+}
+
+.questions li {
+    list-style: none;
+}
+
+
+.a-btn {
+    background-color: darkblue;
+    color: white; 
+    border-radius: 5px; 
+    border-style: none;
+    padding: 10px; 
+    margin: 3px; 
+}
+
+.a-btn:hover {
+    background-color: purple;
+}
+
+

@@ -6,7 +6,50 @@
     <title>Javascript Quiz</title>
     <link rel= "stylesheet" href="assets\style.css">
 </head>
+
 <body>
+    <header class = "header-container">
+        <div class ="header-style">
+            <div class="scoring ">
+                <button id = "see-scores">View Highscores</button>
+            </div>
+            <div class="timer">
+                Time
+            </div>
+        </div>
+    </header>
+
+    <main id= main-quiz>
+        <div class="quiz-start">
+            <h1> Coding Challenge Quiz</h1>
+            <p>
+                Let's test your knowledge with JavaScript! This will be a timed quiz. </br> For every wrong answer, you will be penalized 10 seconds. </br> Click the button below to begin. Good luck!
+            </p>
+            <button class="btn-start">Begin Quiz</button>
+        </div>
+
+        <section id="questions-container">
+            <div class="questions">
+                <ul>
+                <h2>I have a question</h2> 
+                <li>
+                    <button class= "a-btn answer 1">Answer 1</button>
+                </li>   
+                <li>
+                    <button class= "a-btn answer 2">Answer 2</button>
+                </li>
+                <li> 
+                    <button class= "a-btn answer 2">Answer 3</button>
+                </li>
+                <li>
+                    <button class= "a-btn answer-4">Answer 4</button>
+                </li>
+            </ul>
+            </div>
+        </section>
+    
+   
+    </main>
 <script src = "assets\script.js"></script>
 </body>
 </html>
