@@ -20,6 +20,6 @@ This is my Weekly Challenge #4 for my Coding Boot Camp class. We were required t
 ### Usage
 This JavaScript quiz can be used by students to test their knowldege on the subject.
 
-![Javascript Quiz](assets\JSQuizSC.png)  
+![Javascript Quiz](assets/JSQuizSC.png)  
 
 
