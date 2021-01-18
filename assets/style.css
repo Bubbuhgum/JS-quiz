@@ -54,3 +54,7 @@
 #high-scores {
     display: none;
 }
+
+#questions-container h2 {
+    display:none;
+}

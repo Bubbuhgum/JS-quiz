@@ -37,33 +37,33 @@ document.getElementById("questions-container").style.display = 'none';
 const questions = [ 
     //Question 1
     { 
-        question: 'What color is the sky?', 
-        answer: ['1. blue', '2. green', '3. orange', '4. red'],
+        question: 'Commonly used data types Do NOT include:', 
+        answer: ['1. alerts', '2. strings', '3. Booleans', '4. numbers'],
         correctAnswer: 1
     }
     ,
     //Question 2
     { 
-        question: 'How many arms do you have?', 
-        answer: [ '1. 5', '2. 6', '3. 2', '4. 1'],
+        question: 'The condition in an if/else statement is enclosed with:', 
+        answer: [ '1. quotes ', '2. square brackets', '3. parentheses', '4. curly brackets'],
         correctAnswer: 3
     },
     //Question 3
     { 
-        question: 'Name a fruit that is red with a green rind.', 
-        answer: [ '1. orange', '2. apple', '3. watermelon', '4. blueberry'],
+        question: 'String values must be enclosed within ____ when being assigned to variables.', 
+        answer: [ '1. commas', '2. curl brackets', '3. quotes', '4. parentheses'],
         correctAnswer: 3
     },
     //Question 4
     { 
-        question: 'In what state is the city Miami?', 
-        answer: [ '1. Florida', '2. Georgia', '3. New York', '4. Virginia'],
+        question: 'A very useful tool used during development and debugging for printing content to the debugger is:', 
+        answer: [ '1. console log', '2. JavaScript', '3. terminal/bash', '4. for loops'],
         correctAnswer: 1
     },
     //Question 5
     { 
-        question: 'Where is Waldo?', 
-        answer: [ '1. Who knows', '2. who cares', '3. why', '4. All of the Above'],
+        question: 'Arrays in JavaScript can be used to store ______.', 
+        answer: [ '1. other arrays', '2. numbers', '3. strings', '4. All of the Above'],
         correctAnswer: 4
     }
 ]; 
