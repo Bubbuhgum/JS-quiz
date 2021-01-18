@@ -23,8 +23,11 @@
     list-style: none;
 }
 
+#answers {
+    padding-inline-start:0px;
+}
 
-.a-btn, #btn-start {
+.btn, #btn-start {
     background-color: darkblue;
     color: white; 
     border-radius: 5px; 
@@ -33,7 +36,7 @@
     margin: 3px; 
 }
 
-.a-btn:hover, #btn-start:hover {
+.a-btn:hover, #btn-start:hover, .btn:hover {
     background-color: purple;
 }
 
@@ -42,4 +45,12 @@
     color: red;
     font-size: large;
     font-weight: bold;
+}
+
+#quiz-end{
+    display:none;
+}
+
+#high-scores {
+    display: none;
 }

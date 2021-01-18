@@ -1,14 +1,18 @@
 var timerEl = document.querySelector(".timer");
+var scoreBoard = document.querySelector("#score-board");
+var highScores = document.querySelector("#high-scores");
 var beginQuizButton = document.querySelector("#btn-start");
-
-var wrongAnswer = document.querySelector("#btn-wrong");
-var timeLeft = 60;
-var isAnswered = false;
-
-var trackQuestions = 0;
+var saveScoreButton = document.querySelector("#btn-save-score");
+var answers = document.querySelector("#answers");
+var questionsContainer = document.querySelector("#questions-container");
+var timeLeft;
+var score;
+var trackQuestions;
 var currentCorrectAnswer;
+var scoreResult = document.querySelector("#score");
+var endOfQuiz = document.querySelector("#quiz-end");
 var question = document.querySelector("#question");
-var status = document.querySelector("#status");
+var result = document.querySelector("#result");
 var answer1 = document.querySelector("#a-btn-answer-1");
 var answer2 = document.querySelector("#a-btn-answer-2");
 var answer3 = document.querySelector("#a-btn-answer-3");
@@ -18,10 +22,13 @@ answer2.addEventListener("click", checkAnswer);
 answer3.addEventListener("click", checkAnswer); 
 answer4.addEventListener("click", checkAnswer); 
 
+var goBackButton = document.querySelector("#btn-go-back");
+var clearHighScoresButton = document.querySelector("#btn-clear-high-scores");
+goBackButton.addEventListener("click", goBack);
+clearHighScoresButton.addEventListener("click", clearHighScores); 
 
-// Add event listener to start button
 beginQuizButton.addEventListener("click", startQuiz); 
-wrongAnswer.addEventListener("click", decreaseTime); 
+saveScoreButton.addEventListener("click", saveScore); 
 
 //Hide question and answers on first screen
 document.getElementById("questions-container").style.display = 'none';
@@ -33,7 +40,8 @@ const questions = [
         question: 'What color is the sky?', 
         answer: ['1. blue', '2. green', '3. orange', '4. red'],
         correctAnswer: 1
-    },
+    }
+    ,
     //Question 2
     { 
         question: 'How many arms do you have?', 
@@ -63,77 +71,47 @@ const questions = [
 //create variable to begin quiz and display questions in array
 // timer starts at click of button, score will start at 0
 function startQuiz() {
-    console.log('showQuiz');
+    timeLeft = 60;
+    trackQuestions = 0;
+    score = 0;
+    scoreName = '';
+    console.log('startQuiz');
     document.getElementById('intro-text').style.display = 'none';
-    document.getElementById('questions-container').style.display = 'block';
-
-    //document.getElementById('click', 'questions-container');
+    document.getElementById("score-name").value = '';
+    questionsContainer.style.display = 'block';
+    endOfQuiz.style.display = 'none';
+    highScores.style.display = 'none';
 
     startTimer();
-
-    /*askQuestion(questions[0]);
-    askQuestion(questions[1]);
-    askQuestion(questions[2]);
-    askQuestion(questions[3]);
-    askQuestion(questions[4]);*/
-
-
-    /*for(x=0; x < questions.length; x++)
-    {
-        currentCorrectAnswer = questions[x].correctAnswer;
-        status.innerHTML = '';
-
-        question.innerHTML = questions[x].question;
-        answer1.innerHTML = questions[x].answer;
-        answer1.data = questions[x].answer[0];
-        answer2.innerHTML = questions[x].answer[1];        
-        answer3.innerHTML = questions[x].answer[2];        
-        answer4.innerHTML = questions[x].answer[3];
-
-        console.log(questions[x]);
-    }*/
-
-    
-    /*questions.forEach(function(q, index){
-        currentCorrectAnswer = q.correctAnswer;
-        
-            if(isAnswered == false){
-                status.innerHTML = 'Select an answer';
-
-                question.innerHTML = q.question;
-                answer1.innerHTML = q.answer[0];
-                answer1.data = q.answer[0];
-                answer2.innerHTML = q.answer[1];        
-                answer3.innerHTML = q.answer[2];        
-                answer4.innerHTML = q.answer[3];  
-
-                console.log(q);
-            }
-        
-    });*/
-    /*questions.forEach(function(q, index){
-        while(isAnswered == false)
-            askQuestion(q); 
-    });*/
 
     askQuestion(questions[trackQuestions]);
 }
 
+//Loop through each question, end quix at last question
 function askQuestion(q){
-    isAnswered = true;
-    status.innerHTML = 'Select an answer';
-    currentCorrectAnswer = q.correctAnswer;
+    console.log('timeout' + ' ' + trackQuestions + ' ' + questions.length)
+    if(trackQuestions < questions.length - 1)
+    {
+        console.log('question count: ' + trackQuestions);
+        answers.style.visibility = 'visible';
 
-    question.innerHTML = q.question;
-    answer1.innerHTML = q.answer[0];
-    answer1.data = q.answer[0];
-    answer2.innerHTML = q.answer[1];        
-    answer3.innerHTML = q.answer[2];        
-    answer4.innerHTML = q.answer[3];  
+        currentCorrectAnswer = q.correctAnswer;
+        result.innerHTML = '';
 
-    console.log(q);
+        question.innerHTML = q.question;
+        answer1.innerHTML = q.answer[0];
+        answer1.data = q.answer[0];
+        answer2.innerHTML = q.answer[1];        
+        answer3.innerHTML = q.answer[2];        
+        answer4.innerHTML = q.answer[3];  
+
+        console.log(q);
+    }
+    else
+        endQuiz();
 }
 
+// check answers when clicked, display correct or incorrect
 function checkAnswer() {
     var chosenAnswer = (this.getAttribute('data-answer-id'));
 
@@ -141,68 +119,72 @@ function checkAnswer() {
     console.log(currentCorrectAnswer);
     console.log(chosenAnswer);
 
+    answers.style.visibility = 'hidden';
+
     if(currentCorrectAnswer == chosenAnswer){
-        //update status
         console.log('correct');
-        status.innerHTML = 'Correct!'
+        result.innerHTML = '<span style="color:green;">Correct!</span>';
+        score += 10;
     }
     else{
         decreaseTime();
         console.log('incorrect');
-        //update status
-        status.innerHTML = 'Incorrect!'
+        result.innerHTML = '<span style="color:red;">Incorrect!</span>';
+        score -= 2;
     }
-    isAnswered = false;
 
     trackQuestions++; 
-    askQuestion(questions[trackQuestions]);
+
+    setTimeout(function(){
+        askQuestion(questions[trackQuestions]);
+    }, 1000);
 }
 
+//Save score at end of game and show Highscores
+function saveScore(){
+    console.log(document.getElementById("score-name").value);
+    var node = document.createElement("p");
+    var nodeValue = document.createTextNode(document.getElementById("score-name").value + ': ' + score);
+    node.appendChild(nodeValue);
+    scoreBoard.appendChild(node);
+    endOfQuiz.style.display = 'none';
+    highScores.style.display = 'block';
+}
+
+//decrease time by 10 point when answer is incorrect
 function decreaseTime() {
     timeLeft -= 10;
 }
 
+//start timer when Begin Quiz button is clicked, end time after all questiosn are answered or time is at 0
 function startTimer() {
     console.log('startTimer')
     var timer = setInterval(function()
     {
         timeLeft--;
         timerEl.innerHTML = timeLeft;
-        if(timeLeft < 0 || trackQuestions >= questions.length)
+        if(timeLeft < 0 || trackQuestions == questions.length - 1)
         {
             clearInterval(timer);
-            alert('You Lose');
-            endQuiz();
+            endQuiz(timer);
         }    
     },1000);
 }
 
-
-function endQuiz(){
-    timerEl.innerHTML = '0';
-    
+//Show Final Score
+function endQuiz(timer){
+    timerEl.innerHTML = 'DONE';
+    questionsContainer.style.display = 'none';
+    endOfQuiz.style.display = 'block';
+    scoreResult.innerHTML = 'Your final score is: ' + score;
 }
 
+//Go back to start of quiz when it is over
+function goBack(){
+    startQuiz();
+}
 
-//console.log(showQuiz);
-
-///////////////
-// Initializers
-// Get references to the start button element
-//var startButton = document.querySelector("#btn-start");
-
-
-
-//Loop over questions if loop
-
-//Compare answers
-
-//Increase score
-
-//If answer wrong, time decreases by 10 secs
-
-//Questions answered or timer reaches 0, end quiz
-
-//Show Final Score
-
-//Save highscore and initials to localStorage
+//clear high scores
+function clearHighScores(){
+    scoreBoard.innerHTML='';
+}
